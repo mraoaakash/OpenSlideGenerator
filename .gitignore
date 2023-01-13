@@ -1,0 +1,26 @@
+*.jpg
+*.tif
+*.tiff
+*.png
+*.gif
+
+# Audio
+*.mp3
+*.wav
+
+# Video
+
+# Misc
+*.bak
+*.log
+*.tmp
+*.DS_Store
+*.swp
+*.swo
+*.swn
+*.swo
+*.swn
+
+# Composer
+composer.phar
+vendor/
