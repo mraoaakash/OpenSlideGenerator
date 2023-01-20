@@ -1,7 +1,7 @@
 #! /bin/bash
-#PBS -N histology
-#PBS -o model_out.log
-#PBS -e model_err.log
+#PBS -N OS-API-CSV
+#PBS -o out.log
+#PBS -e err.log
 #PBS -l ncpus=100
 #PBS -q cpu
 
