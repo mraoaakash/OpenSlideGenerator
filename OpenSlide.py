@@ -31,17 +31,17 @@ def getTiles(img):
                 # if not os.path.isdir(f"/home/chs.rintu/Documents/chs-lab-ws02/research-cancerPathology/histoImgSplit/OpenSlideGen/dataset/L{str(i)}/images"):
                 #         os.makedirs(f"/home/chs.rintu/Documents/chs-lab-ws02/research-cancerPathology/histoImgSplit/OpenSlideGen/dataset/L{str(i)}/images")
                 # im1 = deepzwsi.save(f"/home/chs.rintu/Documents/chs-lab-ws02/research-cancerPathology/histoImgSplit/OpenSlideGen/dataset/L{str(i)}/images/{str(i)}_{str(j)}_{str(k)}.jpg")
-                if not os.path.isdir(f"/Users/mraoaakash/Documents/research/research-tnbc/histoImgSplit/OpenSlideGen/dataset/{img.split('/')[-1].split('.')[0]}/L{str(i)}/images"):
-                        os.makedirs(f"/Users/mraoaakash/Documents/research/research-tnbc/histoImgSplit/OpenSlideGen/dataset/{img.split('/')[-1].split('.')[0]}/L{str(i)}/images")
+                if not os.path.isdir(f"/storage/bic/data/breastCancer/OpenSlideGenerator/dataset/{img.split('/')[-1].split('.')[0]}/L{str(i)}/images"):
+                        os.makedirs(f"/storage/bic/data/breastCancer/OpenSlideGenerator/dataset/{img.split('/')[-1].split('.')[0]}/L{str(i)}/images")
                 if deepzwsi.size[0] < tile_size or deepzwsi.size[1] < tile_size:
                     padded = np.ones((tile_size, tile_size, 3), dtype=np.uint8)
                     padded *= 255
                     deepzwsiarr = np.array(deepzwsi)
                     padded[:deepzwsi.size[1], :deepzwsi.size[0], :] = deepzwsiarr
                     deepzwsi = Image.fromarray(padded)
-                    im1 = deepzwsi.save(f"/Users/mraoaakash/Documents/research/research-tnbc/histoImgSplit/OpenSlideGen/dataset/{img.split('/')[-1].split('.')[0]}/L{str(i)}/images/{str(i)}_{str(j)}_{str(k)}.jpg")
+                    im1 = deepzwsi.save(f"/storage/bic/data/breastCancer/OpenSlideGenerator/dataset/{img.split('/')[-1].split('.')[0]}/L{str(i)}/images/{str(i)}_{str(j)}_{str(k)}.jpg")
                 else:
-                    im1 = deepzwsi.save(f"/Users/mraoaakash/Documents/research/research-tnbc/histoImgSplit/OpenSlideGen/dataset/{img.split('/')[-1].split('.')[0]}/L{str(i)}/images/{str(i)}_{str(j)}_{str(k)}.jpg")
+                    im1 = deepzwsi.save(f"/storage/bic/data/breastCancer/OpenSlideGenerator/dataset/{img.split('/')[-1].split('.')[0]}/L{str(i)}/images/{str(i)}_{str(j)}_{str(k)}.jpg")
 
 def stats(path, sizes):
     file_sizes = [[0 for i in range(18)]for j in range(len(sizes))]
@@ -82,7 +82,7 @@ if __name__ == '__main__':
     pool.close()
     pool.join()  
     # stats("/home/chs.rintu/Documents/chs-lab-ws02/research-cancerPathology/histoImgSplit/OpenSlideGen", i)
-    # stats("/Users/mraoaakash/Documents/research/research-tnbc/histoImgSplit/OpenSlideGen", [256, 512, 1024])
+    # stats("/storage/bic/data/breastCancer/OpenSlideGenerator", [256, 512, 1024])
     # textGen("/home/chs.rintu/Documents/chs-lab-ws02/research-cancerPathology/histoImgSplit/OpenSlideGen/images")
     # for i in range(9, 18):
-    #     textGen(f"/Users/mraoaakash/Documents/research/research-tnbc/histoImgSplit/OpenSlideGen/dataset/L{i}")
+    #     textGen(f"/storage/bic/data/breastCancer/OpenSlideGenerator/dataset/L{i}")
