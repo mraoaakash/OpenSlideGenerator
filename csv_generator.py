@@ -9,13 +9,13 @@ def list_creator(path):
         for file in files:
             if file.endswith('.tif'):
                 if "HNE" in file.upper():
-                    print(os.path.join(dirs, file))
-                    # image = openslide.OpenSlide(os.path.join(dirs, file))
-                    # # print(image.dimensions)
-                    # dzoomImg = DeepZoomGenerator(image, tile_size=tile_size, overlap=0, limit_bounds=True)
-                    # # print(dzoomImg.level_count)
-                    # # print(dzoomImg.level_tiles)
-                    # print(dzoomImg.level_dimensions)
+                    print(file)
+                    image = openslide.OpenSlide(os.path.join(dirs, file))
+                    # print(image.dimensions)
+                    dzoomImg = DeepZoomGenerator(image, tile_size=256, overlap=0, limit_bounds=True)
+                    print(dzoomImg.level_count)
+                    print(dzoomImg.level_tiles)
+                    print(dzoomImg.level_dimensions)
 
 
 if __name__ == '__main__':
