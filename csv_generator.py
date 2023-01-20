@@ -4,7 +4,7 @@ import multiprocessing as mp
 import openslide
 from openslide.deepzoom import DeepZoomGenerator
 from PIL import Image
-import numpy as np
+import numpy as
 
 
 def list_creator(path):
@@ -15,7 +15,8 @@ def list_creator(path):
                     print(file)
                     try:
                         tile_size = 256
-                        image = openslide.OpenSlide(os.path.join(dirs, file))
+                        img = os.path.join(dirs, file)
+                        image = openslide.OpenSlide(img)
                         # print(image.dimensions)
                         dzoomImg = DeepZoomGenerator(image, tile_size=tile_size, overlap=0, limit_bounds=True)
                         print(dzoomImg.level_count)
@@ -32,17 +33,17 @@ def list_creator(path):
                                     # if not os.path.isdir(f"/home/chs.rintu/Documents/chs-lab-ws02/research-cancerPathology/histoImgSplit/OpenSlideGen/dataset/L{str(i)}/images"):
                                     #         os.makedirs(f"/home/chs.rintu/Documents/chs-lab-ws02/research-cancerPathology/histoImgSplit/OpenSlideGen/dataset/L{str(i)}/images")
                                     # im1 = deepzwsi.save(f"/home/chs.rintu/Documents/chs-lab-ws02/research-cancerPathology/histoImgSplit/OpenSlideGen/dataset/L{str(i)}/images/{str(i)}_{str(j)}_{str(k)}.jpg")
-                                    if not os.path.isdir(f"/storage/bic/data/breastCancer/OpenSlideGenerator/dataset/{path.split('/')[-1].split('.')[0]}/L{str(i)}/images"):
-                                            os.makedirs(f"/storage/bic/data/breastCancer/OpenSlideGenerator/dataset/{path.split('/')[-1].split('.')[0]}/L{str(i)}/images")
+                                    if not os.path.isdir(f"/storage/bic/data/breastCancer/OpenSlideGenerator/dataset/{img.split('/')[-1].split('.')[0]}/L{str(i)}/images"):
+                                            os.makedirs(f"/storage/bic/data/breastCancer/OpenSlideGenerator/dataset/{img.split('/')[-1].split('.')[0]}/L{str(i)}/images")
                                     if deepzwsi.size[0] < tile_size or deepzwsi.size[1] < tile_size:
                                         padded = np.ones((tile_size, tile_size, 3), dtype=np.uint8)
                                         padded *= 255
                                         deepzwsiarr = np.array(deepzwsi)
                                         padded[:deepzwsi.size[1], :deepzwsi.size[0], :] = deepzwsiarr
                                         deepzwsi = Image.fromarray(padded)
-                                        im1 = deepzwsi.save(f"/storage/bic/data/breastCancer/OpenSlideGenerator/dataset/{path.split('/')[-1].split('.')[0]}/L{str(i)}/images/{str(i)}_{str(j)}_{str(k)}.jpg")
+                                        im1 = deepzwsi.save(f"/storage/bic/data/breastCancer/OpenSlideGenerator/dataset/{img.split('/')[-1].split('.')[0]}/L{str(i)}/images/{str(i)}_{str(j)}_{str(k)}.jpg")
                                     else:
-                                        im1 = deepzwsi.save(f"/storage/bic/data/breastCancer/OpenSlideGenerator/dataset/{path.split('/')[-1].split('.')[0]}/L{str(i)}/images/{str(i)}_{str(j)}_{str(k)}.jpg")
+                                        im1 = deepzwsi.save(f"/storage/bic/data/breastCancer/OpenSlideGenerator/dataset/{img.split('/')[-1].split('.')[0]}/L{str(i)}/images/{str(i)}_{str(j)}_{str(k)}.jpg")
                     except:
                         print("Error in ", file)
                         continue
