@@ -4,7 +4,7 @@ import multiprocessing as mp
 import openslide
 from openslide.deepzoom import DeepZoomGenerator
 from PIL import Image
-import numpy as
+import numpy as np
 
 
 def list_creator(path):
