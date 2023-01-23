@@ -71,7 +71,7 @@ if __name__ == '__main__':
             # list_creator(path_new_new, path_new_level)
         
     pool = Pool(mp.cpu_count())
-    pool.map(list_creator, main_path)
+    pool.map(filter, main_path)
     pool.close()
     pool.join()
     print('Done')
