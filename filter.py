@@ -46,7 +46,7 @@ def list_creator(path, path_new_level):
 
 
 if __name__ == '__main__':
-    path = './dataset'
+    path = '/storage/bic/data/breastCancer/OpenSlideGenerator/dataset'
     main_path = []
     pool = Pool(mp.cpu_count())
     # for i in os.listdir(path):
@@ -59,7 +59,7 @@ if __name__ == '__main__':
     # print('Done')
 
     main_path = []
-    path = "/Users/mraoaakash/Documents/research/research-tnbc/OpenSlideGenerator/dataset"    
+    path = "/storage/bic/data/breastCancer/OpenSlideGenerator/dataset"    
     for i in os.listdir(path):
         path_new = os.path.join(path, i)
         for j in os.listdir(path_new):
