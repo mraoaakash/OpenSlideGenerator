@@ -13,5 +13,5 @@ source ~/.bashrc
 
 conda activate openslide
 
-python3 /storage/bic/data/breastCancer/OpenSlideGenerator/csv_generator.py
+python3 /storage/bic/data/breastCancer/OpenSlideGenerator/filter.py
 
