@@ -11,11 +11,11 @@ def filter(path):
         print(f'Filtering {i}')
         new_path = os.path.join(path, i)
         if not os.path.isdir(os.path.join(new_path, 'rejected')):
-            os.makedirs(os.path.join(new_path, 'rejected'), exist_ok=True)
+            os.makedirs(os.path.join(new_path, 'rejected'))
         rejected = os.path.join(new_path, 'rejected')
         # print(rejected)
         if not os.path.isdir(os.path.join(new_path, 'accepted')):
-            os.makedirs(os.path.join(new_path, 'accepted'), exist_ok=True)
+            os.makedirs(os.path.join(new_path, 'accepted'))
         accepted = os.path.join(new_path, 'accepted')
         # print(accepted)
         model = joblib.load('./Differentiator/finalized_model.sav')
@@ -67,5 +67,6 @@ if __name__ == '__main__':
             path_new_new = os.path.join(path_new_level, "accepted")
             # print(path_new_new)
             main_path.append(path_new_new)
-            list_creator(path_new_new, path_new_level)
+            print(path_new_level)
+            # list_creator(path_new_new, path_new_level)
     print(main_path)
