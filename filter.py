@@ -64,9 +64,15 @@ if __name__ == '__main__':
         path_new = os.path.join(path, i)
         for j in os.listdir(path_new):
             path_new_level = os.path.join(path_new, j)
-            path_new_new = os.path.join(path_new_level, "accepted")
+            # path_new_new = os.path.join(path_new_level, "accepted")
             # print(path_new_new)
-            # main_path.append(path_new_new)
-            print(path_new_level)
+            # main_path.append(path_new_level)
+            # print(path_new_level)
             # list_creator(path_new_new, path_new_level)
+        
+        pool = Pool(mp.cpu_count())
+        pool.map(list_creator, main_path)
+        pool.close()
+        pool.join()
+        print('Done')
     # print(main_path)
