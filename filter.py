@@ -18,7 +18,7 @@ def filter(path):
             os.makedirs(os.path.join(new_path, 'accepted'))
         accepted = os.path.join(new_path, 'accepted')
         # print(accepted)
-        model = joblib.load('./Differentiator/finalized_model.sav')
+        model = joblib.load('/storage/bic/data/breastCancer/OpenSlideGenerator/Differentiator/finalized_model.sav')
         # print('Model loaded')
         for image in os.listdir(os.path.join(new_path, 'images')):
             image_path = os.path.join(new_path, 'images', image)
