@@ -71,18 +71,19 @@ def textGen(path):
 
 
 if __name__ == '__main__':
-    tile_size = [256] # originally [256, 512, 1024]
-    pool = Pool(mp.cpu_count())
-    imgs = []
-    for i in os.listdir("/Users/mraoaakash/Documents/research/research-tnbc/histoImgSplit/testImage"):
-        imgs.append(f'/Users/mraoaakash/Documents/research/research-tnbc/histoImgSplit/testImage/{i}')
-        print(i)
-    # imgs = imgs[0:1]
-    pool.map(getTiles, imgs)
-    pool.close()
-    pool.join()  
+    # tile_size = [256] # originally [256, 512, 1024]
+    # pool = Pool(mp.cpu_count())
+    # imgs = []
+    # for i in os.listdir("/Users/mraoaakash/Documents/research/research-tnbc/histoImgSplit/testImage"):
+    #     imgs.append(f'/Users/mraoaakash/Documents/research/research-tnbc/histoImgSplit/testImage/{i}')
+    #     print(i)
+    # # imgs = imgs[0:1]
+    # pool.map(getTiles, imgs)
+    # pool.close()
+    # pool.join()  
     # stats("/home/chs.rintu/Documents/chs-lab-ws02/research-cancerPathology/histoImgSplit/OpenSlideGen", i)
     # stats("/storage/bic/data/breastCancer/OpenSlideGenerator", [256, 512, 1024])
     # textGen("/home/chs.rintu/Documents/chs-lab-ws02/research-cancerPathology/histoImgSplit/OpenSlideGen/images")
     # for i in range(9, 18):
     #     textGen(f"/storage/bic/data/breastCancer/OpenSlideGenerator/dataset/L{i}")
+    pass
