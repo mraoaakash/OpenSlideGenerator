@@ -8,35 +8,39 @@ from Differentiator.hardcode_tester import predict
 import warnings
 warnings.filterwarnings("ignore")
 
-def filter(path):
-    new_path = path
-    if not os.path.isdir(os.path.join(new_path, 'rejected')):
-        os.makedirs(os.path.join(new_path, 'rejected'))
-    rejected = os.path.join(new_path, 'rejected')
-    # print(rejected)
-    if not os.path.isdir(os.path.join(new_path, 'accepted')):
-        os.makedirs(os.path.join(new_path, 'accepted'))
-    accepted = os.path.join(new_path, 'accepted')
-    # print(accepted)
-    model = joblib.load('/storage/bic/data/breastCancer/OpenSlideGenerator/Differentiator/finalized_model.sav')
-    # print('Model loaded')
-    for image in os.listdir(os.path.join(new_path, 'images')):
-        image_path = os.path.join(new_path, 'images', image)
-        # print(image_path)
-        data = np.array(predict(image_path)).reshape(1, -1)
-        prediction = model.predict(data)
-        # print(prediction[0])
-        if prediction == 'cellSpace':
-            # print(f'Accepted {image_path}')
-            shutil.copy(image_path, accepted)
-        else:
-            print (f'Rejected {image_path}')
-            shutil.copy(image_path, rejected)
-    return
 
-if __name__ == '__main__':
-    path = '/storage/bic/data/breastCancer/OpenSlideGenerator/dataset'
-    for dirs, subdirs, files in os.walk(path):
-        if len(subdirs) == 0:
-            print(dirs, subdirs, files, "\n")
-    
+def predict(path):
+    image = Image.open(path)
+    image = image.resize((224, 224))
+    # print(np.array(image).shape)
+    image = np.array(image)
+    imageR = image[:,:,0]
+    imageG = image[:,:,1]
+    imageB = image[:,:,2]
+    imageR = imageR.flatten()
+    imageG = imageG.flatten()
+    imageB = imageB.flatten()
+    imageR_mean = np.mean(imageR)
+    imageG_mean = np.mean(imageG)
+    imageB_mean = np.mean(imageB)
+    imageR_std = np.std(imageR)
+    imageG_std = np.std(imageG)
+    imageB_std = np.std(imageB)
+    imageR_sum = np.sum(imageR)
+    imageG_sum = np.sum(imageG)
+    imageB_sum = np.sum(imageB)
+    # print(f'Image Red Channel mean: {imageR_mean}, std: {imageR_std}, sum: {imageR_sum}')
+    # print(f'Image Green Channel mean: {imageG_mean}, std: {imageG_std}, sum: {imageG_sum}')
+    # print(f'Image Blue Channel mean: {imageB_mean}, std: {imageB_std}, sum: {imageB_sum}')
+
+    total_sum = np.sum(image)
+    tota_mean = np.mean(image)
+    total_std = np.std(image)
+    # print(f'Image total mean: {tota_mean}, std: {total_std}, sum: {total_sum}')
+    return (imageR_mean, imageR_std, imageR_sum, imageG_mean, imageG_std, imageG_sum, imageB_mean, imageB_std, imageB_sum, tota_mean, total_std, total_sum,)
+
+masterpath = "/storage/bic/data/breastCancer/OpenSlideGenerator/dataset"
+for dirs, subdirs, files in os.walk(masterpath):
+    for file in files:
+        locpath = os.path.join
+    pass
