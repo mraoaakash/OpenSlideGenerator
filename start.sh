@@ -2,8 +2,9 @@
 #PBS -N OS-API-CSV
 #PBS -o out.log
 #PBS -e err.log
-#PBS -l ncpus=100
+#PBS -l ncpus=50
 #PBS -q cpu
+#PBS -l host=compute3
 
 module load compiler/anaconda3
 
