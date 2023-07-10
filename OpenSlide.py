@@ -21,7 +21,7 @@ outpath = "/media/chs.ccb/06b46169-9931-4457-aba6-c50c11d77e3d/researchxBreastCa
 def getTiles(img):
     tile_size = 300
     image = openslide.OpenSlide(img)
-    dzoomImg = DeepZoomGenerator(image, tile_size=tile_size, overlap=tile_size//2, limit_bounds=True)
+    dzoomImg = DeepZoomGenerator(image, tile_size=tile_size, overlap=0, limit_bounds=True)
     print(dzoomImg.level_dimensions)
     for i in range(9,dzoomImg.level_count):    
         leveltiles = dzoomImg.level_tiles[i]
