@@ -76,7 +76,7 @@ if __name__ == '__main__':
     for i in os.listdir(f"/{inpath}"):
         imgs.append(f'/{inpath}/{i}')
         print(i)
-    imgs = imgs[0:1]
+    # imgs = imgs[0:1]
     pool.map(getTiles, imgs)
     pool.close()
     pool.join()  
