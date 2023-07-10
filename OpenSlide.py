@@ -10,18 +10,18 @@ import seaborn as sns
 import pandas as pd
 from PIL import Image
 
-key = {
-    "20210821_720_358_19_1250_19_A_ER_biopsy_HnE_40X":"ICGA-0001-00001-001-001-040-0001",
-    "20210821_719_353_19_1320_19_B_HER2_biopsy_HnE_40X":"ICGA-0001-00002-001-001-040-0001",
-    "20200220-317-270_14-G_14_4036C-TNBC-Surgery-HnE-40X":"ICGA-0001-00003-001-001-040-0001",
-}
+# key = {
+#     "20210821_720_358_19_1250_19_A_ER_biopsy_HnE_40X":"ICGA-0001-00001-001-001-040-0001",
+#     "20210821_719_353_19_1320_19_B_HER2_biopsy_HnE_40X":"ICGA-0001-00002-001-001-040-0001",
+#     "20200220-317-270_14-G_14_4036C-TNBC-Surgery-HnE-40X":"ICGA-0001-00003-001-001-040-0001",
+# }
 inpath = "/media/chs.ccb/06b46169-9931-4457-aba6-c50c11d77e3d/researchxBreastCancer/temp"
 outpath = "/media/chs.ccb/06b46169-9931-4457-aba6-c50c11d77e3d/researchxBreastCancer/out"
 
 def getTiles(img):
-    tile_size = 256
+    tile_size = 300
     image = openslide.OpenSlide(img)
-    dzoomImg = DeepZoomGenerator(image, tile_size=tile_size, overlap=0, limit_bounds=True)
+    dzoomImg = DeepZoomGenerator(image, tile_size=tile_size, overlap=tile_size//2, limit_bounds=True)
     print(dzoomImg.level_dimensions)
     for i in range(9,dzoomImg.level_count):    
         leveltiles = dzoomImg.level_tiles[i]
@@ -37,9 +37,10 @@ def getTiles(img):
                     deepzwsiarr = np.array(deepzwsi)
                     padded[:deepzwsi.size[1], :deepzwsi.size[0], :] = deepzwsiarr
                     deepzwsi = Image.fromarray(padded)
-                    im1 = deepzwsi.save(f"{outpath}/{img.split('/')[-1].split('.')[0]}/L{str(i)}/images/{str(i)}_{str(j)}_{str(k)}.tif")
+                    # formatting a string with 7 leading zeros
+                    im1 = deepzwsi.save(f"{outpath}/{img.split('/')[-1].split('.')[0]}/L{str(i)}/images/{img.split('/')[-1].split('.')[0]}-L{str(i)}-{str(j)}-{str(k)}.tif")
                 else:
-                    im1 = deepzwsi.save(f"{outpath}/{img.split('/')[-1].split('.')[0]}/L{str(i)}/images/{str(i)}_{str(j)}_{str(k)}.tif")
+                    im1 = deepzwsi.save(f"{outpath}/{img.split('/')[-1].split('.')[0]}/L{str(i)}/images/{img.split('/')[-1].split('.')[0]}-L{str(i)}-{str(j)}-{str(k)}.tif")
 
 def stats(path, sizes):
     file_sizes = [[0 for i in range(18)]for j in range(len(sizes))]
