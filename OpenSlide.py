@@ -29,17 +29,17 @@ def getTiles(img):
         for j in range(0,leveltiles[0]):
             for k in range(0,leveltiles[1]):
                 deepzwsi = dzoomImg.get_tile(i, address = (j, k))
-                if not os.path.isdir(f"{outpath}/{key[img.split('/')[-1].split('.')[0]]}/L{str(i)}/images"):
-                        os.makedirs(f"{outpath}/{key[img.split('/')[-1].split('.')[0]]}/L{str(i)}/images")
+                if not os.path.isdir(f"{outpath}/{img.split('/')[-1].split('.')[0]}/L{str(i)}/images"):
+                        os.makedirs(f"{outpath}/{img.split('/')[-1].split('.')[0]}/L{str(i)}/images")
                 if deepzwsi.size[0] < tile_size or deepzwsi.size[1] < tile_size:
                     padded = np.ones((tile_size, tile_size, 3), dtype=np.uint8)
                     padded *= 255
                     deepzwsiarr = np.array(deepzwsi)
                     padded[:deepzwsi.size[1], :deepzwsi.size[0], :] = deepzwsiarr
                     deepzwsi = Image.fromarray(padded)
-                    im1 = deepzwsi.save(f"{outpath}/{key[img.split('/')[-1].split('.')[0]]}/L{str(i)}/images/{str(i)}_{str(j)}_{str(k)}.tif")
+                    im1 = deepzwsi.save(f"{outpath}/{img.split('/')[-1].split('.')[0]}/L{str(i)}/images/{str(i)}_{str(j)}_{str(k)}.tif")
                 else:
-                    im1 = deepzwsi.save(f"{outpath}/{key[img.split('/')[-1].split('.')[0]]}/L{str(i)}/images/{str(i)}_{str(j)}_{str(k)}.tif")
+                    im1 = deepzwsi.save(f"{outpath}/{img.split('/')[-1].split('.')[0]}/L{str(i)}/images/{str(i)}_{str(j)}_{str(k)}.tif")
 
 def stats(path, sizes):
     file_sizes = [[0 for i in range(18)]for j in range(len(sizes))]
