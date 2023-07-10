@@ -38,9 +38,9 @@ def getTiles(img):
                     padded[:deepzwsi.size[1], :deepzwsi.size[0], :] = deepzwsiarr
                     deepzwsi = Image.fromarray(padded)
                     # formatting a string with 7 leading zeros
-                    im1 = deepzwsi.save(f"{outpath}/{img.split('/')[-1].split('.')[0]}/L{str(i)}/{img.split('/')[-1].split('.')[0]}-L{str(i)}-{str(j)}-{str(k)}.tif")
+                    im1 = deepzwsi.save(f"{outpath}/{img.split('/')[-1].split('.')[0]}/L{str(i)}/{img.split('/')[-1].split('.')[0]}-L{str(i).zfill(2)}-{str(j).zfill(4)}-{str(k).zfill(4)}.tif")
                 else:
-                    im1 = deepzwsi.save(f"{outpath}/{img.split('/')[-1].split('.')[0]}/L{str(i)}/{img.split('/')[-1].split('.')[0]}-L{str(i)}-{str(j)}-{str(k)}.tif")
+                    im1 = deepzwsi.save(f"{outpath}/{img.split('/')[-1].split('.')[0]}/L{str(i)}/{img.split('/')[-1].split('.')[0]}-L{str(i).zfill(2)}-{str(j).zfill(4)}-{str(k).zfill(4)}.tif")
 
 def stats(path, sizes):
     file_sizes = [[0 for i in range(18)]for j in range(len(sizes))]
