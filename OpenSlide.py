@@ -20,24 +20,15 @@ outpath = "/media/chs.ccb/06b46169-9931-4457-aba6-c50c11d77e3d/researchxBreastCa
 
 def getTiles(img):
     tile_size = 256
-    # image = openslide.OpenSlide("/home/chs.rintu/Documents/chs-lab-ws02/research-cancerPathology/histoImgSplit/testImage/20190610_541_528-18_1412-18-A_Biopsy_TNBC_HnE_40X.tif")
     image = openslide.OpenSlide(img)
-    # print(image.dimensions)
     dzoomImg = DeepZoomGenerator(image, tile_size=tile_size, overlap=0, limit_bounds=True)
-    # print(dzoomImg.level_count)
-    # print(dzoomImg.level_tiles)
     print(dzoomImg.level_dimensions)
     for i in range(9,dzoomImg.level_count):    
-        # deepzwsi = dzoomImg.get_tile(i, address = (0, 0))
-        # print(deepzwsi)
         leveltiles = dzoomImg.level_tiles[i]
         print(f'leveltiles_{i} : {leveltiles}')
         for j in range(0,leveltiles[0]):
             for k in range(0,leveltiles[1]):
                 deepzwsi = dzoomImg.get_tile(i, address = (j, k))
-                # if not os.path.isdir(f"/home/chs.rintu/Documents/chs-lab-ws02/research-cancerPathology/histoImgSplit/OpenSlideGen/dataset/L{str(i)}/images"):
-                #         os.makedirs(f"/home/chs.rintu/Documents/chs-lab-ws02/research-cancerPathology/histoImgSplit/OpenSlideGen/dataset/L{str(i)}/images")
-                # im1 = deepzwsi.save(f"/home/chs.rintu/Documents/chs-lab-ws02/research-cancerPathology/histoImgSplit/OpenSlideGen/dataset/L{str(i)}/images/{str(i)}_{str(j)}_{str(k)}.jpg")
                 if not os.path.isdir(f"{outpath}/{key[img.split('/')[-1].split('.')[0]]}/L{str(i)}/images"):
                         os.makedirs(f"{outpath}/{key[img.split('/')[-1].split('.')[0]]}/L{str(i)}/images")
                 if deepzwsi.size[0] < tile_size or deepzwsi.size[1] < tile_size:
@@ -46,9 +37,9 @@ def getTiles(img):
                     deepzwsiarr = np.array(deepzwsi)
                     padded[:deepzwsi.size[1], :deepzwsi.size[0], :] = deepzwsiarr
                     deepzwsi = Image.fromarray(padded)
-                    im1 = deepzwsi.save(f"{outpath}/{key[img.split('/')[-1].split('.')[0]]}/L{str(i)}/images/{str(i)}_{str(j)}_{str(k)}.jpg")
+                    im1 = deepzwsi.save(f"{outpath}/{key[img.split('/')[-1].split('.')[0]]}/L{str(i)}/images/{str(i)}_{str(j)}_{str(k)}.tif")
                 else:
-                    im1 = deepzwsi.save(f"{outpath}/{key[img.split('/')[-1].split('.')[0]]}/L{str(i)}/images/{str(i)}_{str(j)}_{str(k)}.jpg")
+                    im1 = deepzwsi.save(f"{outpath}/{key[img.split('/')[-1].split('.')[0]]}/L{str(i)}/images/{str(i)}_{str(j)}_{str(k)}.tif")
 
 def stats(path, sizes):
     file_sizes = [[0 for i in range(18)]for j in range(len(sizes))]
